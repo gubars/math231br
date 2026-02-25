@@ -1521,6 +1521,7 @@ Thus for any good cover $\mathcal{U}$, we have that \v{C}ech cohomology of the c
 \begin{remark} When $X$ is a manifold and $A=\R$, we'll provide a different proof of this fact, via the \emph{de Rham theorem} (\Cref{thm:sheafy-de-rham,thm:de-Rham}).
 \end{remark}
 
+\newpage
 \section{Vector bundles and sheaves of sections}
 
 \begin{definition} A \emph{real vector bundle} $\pi \colon E \to X$ is a map of spaces so that
@@ -1621,12 +1622,12 @@ is a sheaf.
 
 \begin{definition} Let $M$ be a smooth $n$-manifold. Then we denote by
 \begin{align*}
-    \Omega^k_{\dR} = \Sec(-,\wedge^k T^\ast M)
+    \Omega^k_{\dR} = \Sec_{\text{smooth}}(-,\wedge^k T^\ast M)
 \end{align*}
-the sheaf of sections of the $k$th exterior power of the cotangent bundle.
+the sheaf of smooth sections of the $k$th exterior power of the cotangent bundle.
 \end{definition}
 
-\begin{example} We have that $\Omega^0_\dR$ is the sheaf of real-valued differentiable functions on $M$, and $\Omega^1_\dR$ is the sheaf of sections of the cotangent bundle.
+\begin{example} We have that $\Omega^0_\dR$ is the sheaf of real-valued smooth functions on $M$, and $\Omega^1_\dR$ is the sheaf of smooth sections of the cotangent bundle.
 \end{example}
 
 \begin{remark}[Key properties of wedges] If you haven't seen exterior/wedge powers before, here are the key properties to keep in mind:
@@ -1703,6 +1704,7 @@ This is just the product rule for derivatives.
 Let $M$ be a smooth manifold. Show that the exterior derivative in \Cref{def:exterior-derivative} defines a morphism of abelian sheaves.
 \end{exercise}
 
+
 \begin{terminology} \,
 \begin{itemize}
     \item A form $\omega$ is said to be \emph{closed} if $d\omega = 0$.
@@ -1722,7 +1724,7 @@ Let $M$ be a smooth manifold. Show that the exterior derivative in \Cref{def:ext
 
 \begin{lemma} [Poincar\'e Lemma]
 \label{lem:Poincare-lemma}
-On a manifold $M$, the sequence
+On a smooth manifold $M$, the sequence
 \begin{equation}\label{eqn:de-Rham-sequence}
 \begin{aligned}
     \underline{\R} \xto{d} \Omega^0_\dR \xto{d} \Omega^1_\dR \xto{d} \cdots
@@ -1730,7 +1732,7 @@ On a manifold $M$, the sequence
 \end{equation}
 is a long exact sequence of sheaves in $\Ab(M)$.
 \end{lemma}
-\begin{proof} Exactness in $\Ab(M)$ is detected on stalks. This is not the same as being exact on each open set (we might call the latter \emph{sectionwise exactness}), however sectionwise exactness does imply exactness on stalks by \Cref{cor:filtered-colimits-preserve-exactness}. For a given stalk over a point $x$, to argue exactness we take a colimit over the opposite category of the poset of open sets of $M$ which contain $x$. This admits a cofinal system given by those open sets $U\ni x$ for which $U$ is homeomorphic to (an open ball in) $\R^n$ (\Cref{prop:manifold-stalk-cofinal-system}). So we can reduce to proving the Poincar\'e lemma in the case where $M$ is an open ball in Euclidean space. To that end let's fix an $n$ and let $B$ denote the open ball of radius $1$ around the origin in $\R^n$.
+\begin{proof} Exactness in $\Ab(M)$ is detected on stalks. This is not the same as being exact on each open set (we might call the latter \emph{sectionwise exactness}), however sectionwise exactness does imply exactness on stalks by \Cref{cor:filtered-colimits-preserve-exactness}. For a given stalk over a point $x$, to argue exactness we take a colimit over the opposite category of the poset of open sets of $M$ which contain $x$. This admits a cofinal system given by those open sets $U\ni x$ for which $U$ is homeomorphic to (an open ball in) $\R^n$ (\Cref{prop:manifold-stalk-cofinal-system}). In fact since we will be making arguments which leverage differentiability of sections of our sheaves on open neighborhoods, we need to know a bit more - that there is a cofinal system of open sets of $M$ containing $x$ which are \emph{diffeomorphic} to an open ball in $\R^n$. This is satisfied since $M$ is a smooth manifold. Hence we can reduce to proving exactness of \Cref{eqn:de-Rham-sequence} when taking sections over the open ball $B$ of radius 1 around the origin in $\R^n$.
 
 % We first show that \Cref{eqn:de-Rham-sequence} is a chain complex, verifying that $d^2 = 0$ (i.e. that exact forms are closed). As the differentials are abelian group homomorphisms, it suffices to check it on some $\omega = f(x_1, \ldots, x_n) dx_I$ where $f$ is a differentiable function on $B$ and $I$ is some multiindex $I = \{i_1 < i_2 < \cdots < i_k\} \subseteq \{1, \ldots, n\}$.
 
