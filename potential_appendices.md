@@ -9,7 +9,7 @@ Everyone taking this class for credit will be responsible for producing an appen
 ## Elliptic genera and the lemniscate (Dibs: Grayson Kemplin)
 Define elliptic genera, and use them to explain how to compute the arc length of the [lemniscate](https://en.wikipedia.org/wiki/Lemniscate). Reference: Chapter 2 of Hirzebruch's *Manifolds and modular forms*
 
-## Stein manifolds and the Oka-Grauert principle
+## Stein manifolds and the Oka-Grauert principle (Dibs: Ari Krishna)
 Define Stein manifolds, and explain why every complex topological vector bundle on a complex Stein manifold admits a holomorphic structure
 
 ## Cartan-Serre finiteness
