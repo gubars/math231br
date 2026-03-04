@@ -1703,6 +1703,10 @@ This is just the product rule for derivatives.
 \begin{exercise}
 Let $M$ be a smooth manifold. Show that the exterior derivative in \Cref{def:exterior-derivative} defines a morphism of abelian sheaves.
 \end{exercise}
+% \begin{itemize}
+%     \item show it first on charts
+%     \item argue \emph{independence} of charts. that is, $f^\ast (d\alpha) = d (f^\ast \alpha)$ if $f \colon \R^n \to \R^n$ is smooth
+% \end{itemize}
 
 
 \begin{terminology} \,
@@ -1863,6 +1867,260 @@ Such a form doesn't exist on $\R^2$, but \emph{does} on $\R^2\minus\{0\}$. This 
 \begin{exercise} Prove that $H^1_{dR}(\R^2\minus \{0\})$ is a 1-dimensional real vector space spanned by the form $\omega$ from \Cref{eqn:1-form-on-R2-minus-origin}.
 \end{exercise}
 % see https://math.stackexchange.com/a/613088 for a worked answer
+
+\section{Fiber bundles}
+
+Previously we talked about sheaves of abelian groups. Much of what we talked about goes through if we have sheaves of groups, or just sheaves of sets. The important thing was that the sheaf was a \emph{local homeomorphism}, in other words the fibers of the projection came with a discrete topology.
+
+There are many interesting groups which come equipped with a natural topological structure, for instance $S^1$ or $\GL_n(\R)$. However our notion of sheaf above won't be able to accurately encompass the idea of having these sorts of groups as fibers unless we forget their topologies, which lands us back in the world of sheaves as above. To that end, we want to discuss a new family of objects in which stalks are allowed to have a non-discrete topology. These are \emph{fiber bundles}.
+
+\begin{definition}\label{def:topological-group} 
+A \emph{topological group} is a group object in the category of spaces. Explicitly, this means it is a \emph{space} $G$, equipped with an identity element $e\in G$ and continuous multiplication and inversion maps
+\begin{align*}
+    m \colon G \times G &\to G \\
+    i \colon G &\to G
+\end{align*}
+which satisfy the expected identities. 
+\end{definition}
+
+\begin{proposition} Let $G$ be a topological group. If the one-point subgroup $\left\{ e \right\} \le G$ is a closed subspace, then $G$ is Hausdorff (and clearly the backwards direction holds as well becauseHausdorff implies $T_1$).
+\end{proposition}
+\begin{proof} Being Hausdorff is equivalent to the image of the diagonal $\Delta \colon G \to G \times G$ being closed. Consider the map
+\begin{align*}
+    G \times G &\to G \\
+    (g_1,g_2) &\mapsto g_1 g_2^{-1}.
+\end{align*}
+By the axioms of topological groups, this is continuous. We have that $\im(\Delta)$ is the preimage of $\left\{ e \right\}$ under this map, hence closed if the identity subgroup is closed.
+\end{proof}
+
+\begin{remark} Some authors, e.g. \cite{Munkres}, assume that topological groups are $T_1$, which is the separation axiom guaranteeing one-point subspaces are automatically closed. Hence all topological groups are Hausdorff from this perspective.
+\end{remark}
+
+\begin{exercise}[{\cite[p.~146]{Munkres}}]
+If $G$ is a topological group and $H \le G$ is a subgroup, then the projection map $G \to G/H$ is open.
+\end{exercise}
+
+
+
+
+
+\begin{example} A \emph{Lie group} is a further strengthening of a topological group -- it is a group object in the subcategory of smooth manifolds.
+\end{example}
+
+
+
+\begin{notation} [{\cite[p.~39]{Hirzebruch}}]
+\label{nota:Gc}
+Let $G$ be a topological group, and $X$ a space. Let $G_c$ denote the presheaf defined by
+\begin{align*}
+    \Open(X)^\op &\to \Grp \\
+    U &\mapsto \Hom_{\Top}(U,G).
+\end{align*}
+Note that $G_c$ is a sheaf by \Cref{exa:representable-sheaves}.
+
+If $G$ has more structure (e.g. it is a \emph{Lie group}) and $X$ is a manifold, we could take a sheaf of differentiable functions valued in the group, for instance --- denote this by $G_\mathfrak{b}$. Or if $G$ is a complex Lie group and $X$ is a complex manifold, we could send $U$ to holomorphic functions $U \to G$--- we denote this by $G_\omega$.
+\end{notation}
+
+\begin{definition}\label{def:fiber-bundle} 
+Let $G$ be a topological group, fix a space $F$ equipped with a faithful\footnote{Hirzebruch uses the word \emph{effective} for the group action, meaning if $g\cdot f = f$ for all $f$ then $g=e$. We use the word \emph{faithful} for this same notion.} continuous action of $G$, and let $X$ be a space. Let  We define a \emph{fiber bundle over $X$ with fiber $F$ and structure group $G$} to be a continuous map $\pi \colon W \to X$ if there exists additional data:
+\begin{itemize}
+    \item an open cover $\left\{ U_i \right\}$ of $X$
+    \item homeomorphisms $h_i \colon \pi^{-1}(U_i) \to U_i \times F$ over $U_i$
+    \item elements $g_{ij} \in \Gamma(U_i\cap U_j, G_c)$
+\end{itemize}
+so that
+\begin{align*}
+    (h_i h_j^{-1})(u,f) = u\cdot g_{ij}(u)f
+\end{align*}
+for all $u \in U_i \times U_j$ and $f\in F$.
+\end{definition}
+
+\begin{terminology} If we want to refer to the cover $\mathcal{U}$, we will say the fiber bundle is \emph{trivialized over $\mathcal{U}$}. The idea being that, via the homeomorphisms $\pi_i$, over each $U_i \in \mathcal{U}$ our fiber bundle does indeed look trivial.
+\end{terminology}
+
+
+\begin{example} For any $F$ and $G$, we have the \emph{trivial fiber bundle} defined by the projection $\pi \colon X \times F \to X$, whose structure group is the trivial group.
+\end{example}
+
+\begin{remark} In the previous example it's not really necessary that the structure group is the trivial group, all we want is that the transition functions $g_{ij}$ to be the identity in whatever the structure group $G$ is. This is part of a more general idea that the structure group is a choice, not necessarily an intrinsic part of the data of a bundle. The structure group could be enlarged by just sitting the $g_{ij}$'s inside a bigger group (provided the action on $F$ is still \emph{faithful}!), however it is not true that the structure group for a fiber bundle can always be reduced. The question of when we have ``reduction of structure group'' for a bundle is an interesting line of thought we won't get into here.
+\end{remark}
+
+\begin{exercise} Repackage the definition of a vector bundle into the definition of a certain type of fiber bundle. That is, if $E \to X$ is a vector bundle, how can we view it as a fiber bundle - what is the fiber and what is the structure group?
+\end{exercise}
+
+
+
+
+\begin{example} The M\"{o}bius strip
+\begin{align*}
+    M &= \frac{[0,2\pi] \times [0,1]}{(0,t)\sim (2\pi,1-t)}
+\end{align*}
+can be viewed as a fiber bundle over $S^1$ via the projection map
+\begin{align*}
+    \pi \colon M &\to S^1 \\
+    (\theta,t) &\mapsto e^{i \theta}.
+\end{align*}
+Here $F = [0,1]$ is the interval, and we can think of $G = \Z/2$ acting via $t \mapsto 1-t$ on $F$.
+\end{example}
+
+\begin{example} In the special case where $F = G$, and the action is $G$ acting on itself by left translation, we call our fiber bundle a \emph{principal fiber bundle}. More on this later.
+\end{example}
+
+
+\subsection{\v{C}ech 1-cocycles}
+
+Given a topological group $G$, we can define the sheaf of groups $G_c$ as in \Cref{nota:Gc}, and therefore construct its \v{C}ech cohomology following \Cref{def:Cech-cohomology-on-cover}. Note that in the previous definition we had assumed our sheaf to be a sheaf of abelian groups, so we have to be a bit careful about products versus sums.
+
+\begin{exercise}[Suggested] Let $G$ be non-abelian, and define $\check{C}^i(\mathcal{U},G)$ as in \Cref{eqn:group-of-Cech-cochains}. Try to write down a formula for the differential $\delta^q$ (but remember you can't take \emph{sums} any more).
+\begin{enumerate}
+    \item If you wrote down a solid definition for $\delta^1$, great! Check if it is a group homomorphism.
+    \item Oops
+    \item Try to redefine it to make it a group homomorphism? Try to turn $\check{C}^\bullet(\mathcal{U},G)$ into a complex.
+    \item Get really frustrated and give up
+\end{enumerate}
+\end{exercise}
+
+The takeaway is that \emph{we can't define higher nonabelian \v{C}ech cohomology}. Nevertheless we can still actually make sense of $\check{H}^1(\mathcal{U},G)$ when $G$ is nonabelian, and it turns out to be a crucially important object in the theory of fiber bundles.
+
+\begin{definition}\label{def:equivalence-of-1-cocycles} 
+Given a topological group $G$ and a space $X$ with an open cover $\mathcal{U} = \left\{ U_i \right\}$, we define the set of \emph{\v{C}ech 1-cocycles} as the ``kernel'' of $\delta^1$. Even though $\delta^1$ isn't a group homomorphism, it is still a map of pointed sets
+\begin{align*}
+    \delta^1 \colon \check{C}^1(\mathcal{U},G) &\to \check{C}^2(\mathcal{U},G) \\
+    (g_{ij}) &\mapsto g_{ij}g_{ik}^{-1} g_{jk}.
+\end{align*}
+We can take the fiber over the identity element to be our ``kernel'' and we obtain
+\begin{align*}
+    \check{Z}^1(\mathcal{U},G) = \left\{ (g_{ij}) \in \prod G(U_i \cap U_j) \mid g_{ik} = g_{jk} g_{ij} \text{ on } G(U_i \cap U_j\cap U_k) \text{ for all }i,j,k \right\}.
+\end{align*}
+\end{definition}
+
+\begin{exercise} Verify, if $(g_{ij}) \in \check{Z}^1(\mathcal{U},G)$, that $g_{ii} = 1$ for every $i$ and that $g_{ij} = g_{ji}^{-1}$.
+\end{exercise}
+
+Two \v{C}ech cocycles define the same element of $\check{H}^1(\mathcal{U},G)$ if they differ by an element in 
+\[
+\im \left( \delta^0 \colon \check{C}^0(\mathcal{U},G) \to \check{C}^1(\mathcal{U},G) \right) \le \check{Z}^1(\mathcal{Y},G),\]
+where $\delta^0$ sends a $0$-cochain $\left\{ \phi_i \colon U_i \to G \right\}$ to $g_{ij} = \phi_i \phi_j^{-1}$.
+
+Unwinding this definition, we have:
+
+\begin{definition}\label{def:non-abelian-cech-h1} \,
+\begin{enumerate}
+    \item Two \v{C}ech cocycles $(g_{ij}), (\gamma_{ij}) \in \check{Z}^1(\mathcal{U},G_c)$ are \emph{equivalent} if there exist elements $f_i \in \Gamma(U_i,G_c)$ for which
+    \begin{align*}
+        \gamma_{ij} = f_i^{-1} g_{ij} f_j
+    \end{align*}
+    in $\Gamma(U_i\cap U_j,G)$ for all $i,j$.
+    \item We define the \emph{non-abelian \v{C}ech cohomology group} $\check{H}^1(\mathcal{U},G)$ to be the pointed set $\check{Z}^1(\mathcal{U},G)$ modulo the equivalence relation defined above.
+\end{enumerate}
+\end{definition}
+
+\begin{exercise} Check carefully that $\check{H}^1(\mathcal{U},G)$ defined above is indeed a group.
+\end{exercise}
+
+\subsection{Comparing cocycles to fiber bundles}
+
+The point of all this is we can construct a fiber bundle out of a cocycle and vice versa.
+
+\begin{construction}[Fiber bundle from cocycle]
+\label{constr:fiber-bundle-from-cocycle}
+Fix $G$ acting faithfully on $F$ as above, and an open cover $\mathcal{U}$ of $X$. Given a cocycle $(g_{ij})\in \check{Z}^1(\mathcal{U},G)$, we can assemble a fiber bundle by taking $U_i \times F$ for each $i$, and gluing them together along the overlaps using the $g_{ij}$'s:
+\begin{align*}
+    U_{i|U_i\cap U_j} \times F &\xto{\sim} U_{j|U_i\cap U_j} \times F \\
+    (u,f) &\mapsto (u, g_{ij}(u)\cdot f).
+\end{align*}
+%
+Since this data is a cocycle, all the gluings agree across triple overlaps (exercise: check this), so we obtain a space $W = \cup_i (U_i \times F) /\sim$ by modding out by this gluing. This can easily be seen to define a fiber bundle with fiber $F$.
+\end{construction}
+
+
+\begin{construction}[Cocycle from fiber bundle]
+\label{constr:cocycle-from-fiber-bundle}
+Given a fiber bundle $\pi \colon W \to F$ with fiber $F$ and structure group $G$, we claim that the elements $g_{ij}$ from \Cref{def:fiber-bundle} define a \v{C}ech 1-cocycle. (Exercise: check this is well-defined)
+\end{construction}
+
+\begin{theorem}\label{thm:Z1-bij-to-fiber-bundles} 
+The constructions in \Cref{constr:fiber-bundle-from-cocycle,constr:cocycle-from-fiber-bundle} are inverse, and define a bijection
+\begin{equation}\label{eqn:cocycle-fiber-bundle-bijection}
+\begin{aligned}
+    \left\{ G\text{-fiber bundles with fiber }F\text{ trivialized over }\mathcal{U} \right\} \leftrightarrow \check{Z}^1(\mathcal{U},G).
+\end{aligned}
+\end{equation}
+\end{theorem}
+
+\begin{remark}[Important] There is no $F$ on the right hand side of the bijection above, and nor should there be. This tells us that $\check{Z}^1(\mathcal{U},G)$ is allowed to classify $G$-fiber bundles with \emph{any} fiber $F$, so long as we fix the fiber and the action ahead of time. It doesn't classify bundles with different fibers simultaneously.
+\end{remark}
+
+
+\begin{example}[Identity to identity]
+\label{exa:identity-cocycle-trivial-fiber-bundle}
+The identity cocycle corresponds to the trivial fiber bundle along the bijection in \Cref{eqn:cocycle-fiber-bundle-bijection}.
+\end{example}
+
+
+\begin{question} If we mod out by coboundaries on the right hand side of the bijection of \Cref{eqn:cocycle-fiber-bundle-bijection}, what does this correspond to as an equivalence class on fiber bundles?
+\end{question}
+
+
+\begin{definition}\label{def:isomorphism-of-fiber-bundles} 
+Fix a topological group $G$, and the data of a faithful continuous action of $G$ on a space $F$. Given two fiber bundles $\pi \colon W \to X$ and $\pi' \colon W' \to X$ with this data, we define an \emph{isomorphism} between them to be a \emph{homeomorphism} $k \colon W\xto{\sim} W'$, making the diagram commute:
+\[ \begin{tikzcd}
+    W\ar[dr,"\pi" below left]\ar[rr,"h" above] &  & W'\ar[dl,"\pi'" below right]\\
+     & X, & 
+\end{tikzcd} \]
+so that for every point $x\in X$ there exists an open neighborhood $U \ni x$, admissible charts $h_U \colon \pi^{-1}(U) \xto{\sim} U \times F$ for $W$ and $h'_U \colon \pi^{\prime-1}(U) \xto{\sim} U \times F$ for $W'$, and an element $g_U \in G(U)$ so that 
+\begin{equation}\label{eqn:cohomology-condition-in-iso-of-fiber-bundles}
+\begin{aligned}
+     h_U' \circ k \circ h_U^{-1}(u,f) = u \times g_U(u)f
+\end{aligned}
+\end{equation}
+for all $u,f$.
+\end{definition}
+
+It will help us to have the following sub-definition, this isn't in Hirzebruch though, we're just inventing it for narrative purposes:
+
+\begin{definition} In the setting of \Cref{def:isomorphism-of-fiber-bundles}, if we have an open cover $\mathcal{U} = \left\{ U_i \right\}$ of $X$ in mind, we will say that $k$ is an isomorphism \emph{witnessed along the cover} if both the bundles $\pi$ and $\pi'$ are trivialized along $\mathcal{U}$, and for any $x\in X$ the open set $U$ in the above definition can always be chosen to be one of the $U_i\in \mathcal{U}$.
+\end{definition}
+
+It's immediate that we have the following:
+
+\begin{theorem}\label{thm:nonabelian-h1-cech-cover} 
+With the data of a topological group $G$ and a fixed faithful action of $G$ on a space $F$, as well as a space $X$ equipped with an open cover $\mathcal{U}$, the bijection in \Cref{eqn:cocycle-fiber-bundle-bijection} descends to a bijection:
+\begin{equation}\label{eqn:cech-cohomology-fiber-bundles-along-cover}
+\begin{aligned}
+    \frac{\left\{ G\text{-fiber bundles with fiber }F\text{ trivialized over }\mathcal{U} \right\}}{\text{isomorphism witnessed along }\mathcal{U}} \leftrightarrow \check{H}^1(\mathcal{U},G).
+\end{aligned}
+\end{equation}
+\end{theorem}
+\begin{proof} We just want to show that, along the bijection in \Cref{thm:Z1-bij-to-fiber-bundles}, admitting an isomorphism witnessed along $\mathcal{U}$ is the same as the associated \v{C}ech 1-cocycles differing by a coboundary. This comes from squinting at \Cref{eqn:cohomology-condition-in-iso-of-fiber-bundles} when $U = U_i$.
+\end{proof}
+
+
+As every isomorphism of fiber bundles is necessarily witnessed along some cover, we're tempted to take colimits along all cover $\mathcal{U}$, and say that $\check{H}^1(X,G)$ is in bijection with \emph{all} principal $G$-bundles on $X$. However this is wrong! There's a subtlety in that we'll actually only be able to detect the \emph{numerable} bundles.
+
+\begin{remark} Suppose we have a principal $G$-bundle $P$ over $X$, and we've picked two covers $\mathcal{U}$ and $\mathcal{V}$ which trivialize the bundle, so we get classes $u\in \check{H}^1(\mathcal{U},G)$ and $v \in \check{H}^1(\mathcal{V},G)$ which each correspond to $P$. We want to be able to argue that $u$ and $v$ agree in the colimit. In order to do this, we need to take a common refinement of $\mathcal{U}$ and $\mathcal{V}$ and show they differ by a 0-cochain along this refined cover. Unless the cover is locally finite, there's no reason to expect this is possible -- we may need to make arguments about modifying infinitely many overlaps at once, and there's no reasonable way to do this continuously unless there is extra structure.
+\end{remark}
+
+Over paracompact spaces, we can always take locally finite refinements, so we don't have to worry about this. We therefore get the following:
+
+\begin{theorem}\label{thm:H1-bijection-with-fiber-bundles} 
+Fix a topological group $G$ and a faithful action on some space $F$. Then for any \emph{paracompact} space $X$, we have that $H^1(X,G_c)$ is in bijection with the set of isomorphism classes of fiber bundles over $X$ with structure group $G$ and fiber $F$.
+\end{theorem}
+\begin{proof} Take colimits over $\mathcal{U}\in \Cov(X)^\op$ in \Cref{thm:nonabelian-h1-cech-cover} and exploit that we have locally finite refinements.
+\end{proof}
+
+
+\begin{example}
+In the theorem above, the trivial fiber bundle corresponds to the identity element of the group $H^1(X,G_c)$.
+\end{example}
+
+
+
+
+
+
+
+
 
 
 
