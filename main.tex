@@ -2404,7 +2404,7 @@ Let $\eta \colon E \to B$ be a numerable (\Cref{def:numerable-open-cover}) princ
 \end{theorem}
 
 \begin{proof}[Sketch]
-First suppose $\eta \colon E \to B$ is contractible, and take some other principal $G$-bundle $\eta \colon V \to X$. We want to find a map $f \colon X \to B$ for which $V\cong f^\ast E$.
+First suppose $\eta \colon E \to B$ is contractible, and take some other principal $G$-bundle $\zeta \colon V \to X$. We want to find a map $f \colon X \to B$ for which $V\cong f^\ast E$.
 
 We define a new bundle
 \begin{align*}
@@ -2424,7 +2424,7 @@ A section of this bundle would be the data we're looking for --- it would be a b
 \end{tikzcd} \]
 and this will necessarily be a pullback, since every principal $G$-bundle map is an isomorphism. So it suffices to argue that $(\zeta,\eta)$ admits a global section. We can define a section locally on one of our covers over which $E$ is trivialize, then use contractability of $E$ to extend it to a global section (see \cite[2.6,2.7,2.8]{doldPartitionsUnityTheory1963}).
 
-For the other direction, suppose $\eta$ is universal. If we can prove the existence of a contractible numerable principal bundle (\cite[\S8]{doldPartitionsUnityTheory1963}), call it $C \to X$, then it is also universal by the previous direction, so we have a composite
+For the other direction, suppose $\eta \colon E \to B$ is universal. If we can prove the existence of a contractible numerable principal bundle (\cite[\S8]{doldPartitionsUnityTheory1963}), call it $C \to X$, then it is also universal by the previous direction, so we have a composite
 \[ \begin{tikzcd}
     E\rar\dar & C\rar\dar & E\dar \\
     B\rar & X\rar & B.
@@ -2462,6 +2462,54 @@ and this is intended to mean that $\RP^\infty$ is (the homotopy type of) the cla
 Let $G$ be a topological group. Then a universal $G$-bundle exists.
 \end{theorem}
 \begin{proof} Omitted, see \cite[\S12.2]{AGP} or \cite[\S16.5]{maybook}.
+\end{proof}
+
+\subsection{Universal bundles for the general linear group}
+
+\begin{notation} Denote by $V_k(\R^\infty)$ the \emph{infinite Stiefel manifold}, defined as the colimit
+\begin{align*}
+    V_k(\R^\infty) := \colim_{n\to\infty} V_k(\R^n)
+\end{align*}
+along the natural inclusions. Similarly we define
+\begin{align*}
+    \Gr_\R(k,\infty) := \colim_{n\to\infty} \Gr_\R(k,n).
+\end{align*}
+\end{notation}
+
+\begin{proposition} The induced map
+\begin{align*}
+    V_k(\R^\infty) \to \Gr_\R(k,\infty)
+\end{align*}
+is still a principal $O(k)$-bundle.
+\end{proposition}
+\begin{proof}[Proof sketch] We can commute the quotient by $O(k)$ with the colimit defining the infinite Stiefel manifold (todo: add more details).
+\end{proof}
+
+\begin{theorem}\label{thm:stiefel-manifold-universal}
+The space $V_k(\R^\infty)$ is contractible, and therefore 
+\begin{align*}
+    V_k(\R^\infty) \to \Gr_\R(k,\infty)
+\end{align*}
+is a universal principal $O(k)$-bundle. Similar statements for $U(k)$ and $\Sp(k)$.
+\end{theorem}
+\begin{proof} This will follow by Dold's classification theorem \Cref{thm:classification-thm-principal-G-bundles}
+\begin{itemize}
+    \item \emph{$V_k(\R^\infty)$ is a CW complex}: todo
+    \item \emph{$V_k(\R^\infty) \to \Gr(k,\infty)$ is a numerable cover}: Since $\Gr(k,\infty)$ is paracompact, every principal bundle over it is numerable, in particular the bundle given by the infinite Stiefel manifold.
+    \item \emph{$V_k(\R^\infty)$ is contractible}: Define
+\begin{align*}
+    L_t \colon \R^\infty &\to \R^\infty \\
+    (x_1,x_2,x_3, \ldots) &\mapsto (1-t)(x_1,x_2,x_3, \ldots) + t(x_1,0,x_2,0, \ldots).
+\end{align*}
+This is an injective linear map, and defines a map $V_k(\R^\infty) \to V_k(\R\infty)$ homotopic to the identity. Now pick a point
+\begin{align*}
+    w\in V_k(\R^\infty)
+\end{align*}
+which is a $k$-frame \emph{all of whose entries lie in even coordinates} and which is zero in the odd coordinates. Then we can take a straight-line interpolation between any odd-supported frame and $w$ --- this will stay orthogonal at all stages of the linear homotopy.
+
+So given any map $S^n \to V_k(\R^\infty)$, we can first deform it by post-composing with $L_t$ and letting $t$ vary to stick the frames in odd coordinates (it's important that $S^n$ is compact here, since the map lands in some $V_k(\R^N)$ for some suitably large $N$, and then we can think about this as living in $V_k(\R^{2N})$ and apply our $L_t$ there). We can then do a straight-line homotopy deforming the image of $S^n$ into the single point $w$. One can check that orthogonality and rank are preserved throughout, so this is a well-defined homotopy. This can be done for any sphere in any dimension, so we get that $\pi_n(V_k(\R^\infty)) = 0$ for all $n$, hence $V_k(\R^\infty)$ is contractible.\footnote{Technically we also need to know that $V_k(\R^\infty)$ is a CW complex, since we're applying Whitehead's theorem to conclude.}
+
+\end{itemize}
 \end{proof}
 
 
