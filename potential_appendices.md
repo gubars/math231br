@@ -27,7 +27,7 @@ Prove that $\Omega_3^\text{SO}=0$ following Chapter 2 of Saveliev's *Lectures on
 ## The $\widehat{A}$-genus (Dibs: Zoe Batterman)
 Discuss the $\widehat{A}$-genus and its connection to spin bordism. 
 
-## The Hodge-de Rham spectral sequence
+## The Hodge-de Rham spectral sequence (Dibs: Brian Siew)
 Explain the spectral sequence $H^p(X,\Omega^q) \Rightarrow H^{p+q}(X,\mathbb{C})$ valid for complex manifolds, following Deligne, Fröhlicher, and others. Explain why it degenerates for compact Kähler manifolds, and give examples of the failure of degeneration in other settings.
 
 ## Calabi-Eckmann manifolds (Dibs: Carl Scandelius)
