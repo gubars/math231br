@@ -15,7 +15,7 @@ Define Stein manifolds, and explain why every complex topological vector bundle 
 ## Cartan-Serre finiteness
 Sketch the proof of the finiteness theorem for sheaf cohomology of coherent modules over the structure sheaf, following Chapter VI of Grauert's book *Theory of Stein spaces*
 
-## Inoue surfaces
+## Inoue surfaces (Dibs: Zoe Batterman)
 Provide an overview of the construction and basic properties of *Inoue surfaces*, which are examples of complex surfaces with no divisors.
 
 ## Sheaf cohomology and singular cohomology (Dibs: Matteo Salloum)
@@ -24,7 +24,7 @@ Give a recount of the comparison theorem between singular cohomology and sheaf c
 ## $\Omega_3=0$ (Dibs: Luke Lelli)
 Prove that $\Omega_3^\text{SO}=0$ following Chapter 2 of Saveliev's *Lectures on the topology of 3-manifolds*. 
 
-## The $\widehat{A}$-genus (Dibs: Zoe Batterman)
+## The $\widehat{A}$-genus
 Discuss the $\widehat{A}$-genus and its connection to spin bordism. 
 
 ## The Hodge-de Rham spectral sequence (Dibs: Brian Siew)
