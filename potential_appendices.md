@@ -27,7 +27,7 @@ Give a recount of the comparison theorem between singular cohomology and sheaf c
 ## $\Omega_3=0$ (Dibs: Luke Lelli)
 Prove that $\Omega_3^\text{SO}=0$ following Chapter 2 of Saveliev's *Lectures on the topology of 3-manifolds*. 
 
-## The $\widehat{A}$-genus
+## The $\widehat{A}$-genus (Dibs: Frank Gubars)
 Discuss the $\widehat{A}$-genus and its connection to spin bordism. 
 
 ## The Hodge-de Rham spectral sequence (Dibs: Brian Siew)
