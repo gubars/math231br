@@ -673,10 +673,10 @@ It is clear now that we have a natural isomorphism $\Z_U\cong\Gamma(U,-)$ (c.f.~
 \end{align*}
 \end{remark}
 
-Observe that if $U_1 \subseteq U_2$ then there is a natural morphism of sheaves $\Z_{U_2}\to \Z_{U_1}$. This extends to a functor
+Observe that if $U_1 \subseteq U_2$ then for any sheaf $F$ we have a restriction map $F(U_2) \to F(U_1)$, which is of the form $\Hom_{\Ab(X)}(\Z_{U_2},F) \to \Hom_{\Ab(X)}(\Z_{U_1},F)$ --- by Yoneda this is precomposition with a morphism of sheaves $\Z_{U_1}\to \Z_{U_2}$. Therefore the assignment $U\mapsto \Z_U$ extends to a functor
 \begin{equation}\label{eqn:U-to-ZU-functor}
 \begin{aligned}
-    \Open(X)^\op &\to \Ab(X) \\
+    \Open(X) &\to \Ab(X) \\
     U &\mapsto \Z_U
 \end{aligned}
 \end{equation}
